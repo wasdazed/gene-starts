@@ -40,8 +40,8 @@ public class tabs extends JTabbedPane{
 		return tabPanel;
 	}
 	
-	public void addAlnTab(Alignment a){
-		alnPanel ap = new alnPanel(a);
+	public void addAlnTab(Alignment a,String f){
+		alnPanel ap = new alnPanel(a,f);
 		String name = a.getName();
 		this.addTab(name,ap);
 		int i = indexOfComponent(ap);

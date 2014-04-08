@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -59,6 +61,7 @@ public class startPanel extends JPanel{
 		p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
 		File f = new File(dir);
 		File[] ff = f.listFiles();
+		Arrays.sort(ff);
 		for (int i = 0; i < ff.length; i++) {
 			final JButton seeAln = new JButton(ff[i].getName());
 			seeAln.setName(ff[i].getAbsolutePath());
@@ -66,7 +69,7 @@ public class startPanel extends JPanel{
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					try{
-						t.addAlnTab(Alignment.readAlignmentFromFile(seeAln.getName()));
+						t.addAlnTab(Alignment.readAlignmentFromFile(seeAln.getName()),seeAln.getName());
 					}
 					catch(NumberFormatException x){
 						JOptionPane.showMessageDialog(null, "no aln");
