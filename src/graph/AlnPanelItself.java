@@ -31,7 +31,7 @@ public class AlnPanelItself extends JPanel{
 		return sb.substring(0, n);
 	}
 	
-	public AlnPanelItself(Alignment a) {
+	public AlnPanelItself(Alignment a,int upstream) {
 	
 	JPanel protnames = new JPanel();
 	protnames.setLayout(new BoxLayout(protnames, BoxLayout.Y_AXIS));
@@ -52,7 +52,7 @@ public class AlnPanelItself extends JPanel{
 		String type = iterator.next();
 		int ng=0;
 		int k=0;
-		while(ng<300){
+		while(ng<upstream){
 			if (type.charAt(k)!='-') ng++;
 			k++;
 		}
@@ -98,7 +98,7 @@ public class AlnPanelItself extends JPanel{
 		   		
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
-		scrollPane.setPreferredSize(new Dimension(1500, 250));
+		scrollPane.setPreferredSize(new Dimension(1300, 500));
 		
 		this.add(protnames, BorderLayout.WEST);
 		this.add(scrollPane, BorderLayout.CENTER);

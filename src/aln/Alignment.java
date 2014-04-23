@@ -74,7 +74,7 @@ public class Alignment {
 			lines.add(s);
 			br.close();
 			Alignment a = new Alignment(names, lines);
-			a.setName(f.substring(f.indexOf("/cases_")+1,f.indexOf('.')));
+			a.setName(f.substring(f.lastIndexOf("/")+1));
 			return a;
 		}
 		catch(Exception e){

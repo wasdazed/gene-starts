@@ -3,6 +3,7 @@ package graph;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import aln.Alignment;
 
@@ -29,16 +31,17 @@ public class startPanel extends JPanel{
 	public startPanel(final tabs t){
 		this.t=t;		
 		
-		String name1 = "cases_ecoliW3110_ecoliDH10B/less/muscle/";
+	/*	String name1 = "cases_ecoliW3110_ecoliDH10B/less/muscle/";
 		JPanel mp1 = getFilePanel(name1);
 		this.add(mp1);
 		
 		String name2 = "cases_ecoliW3110_ecoliDH10B/more/muscle/";
 		JPanel mp2 = getFilePanel(name2);
-		this.add(mp2);
+		this.add(mp2);*/
 		
 		String name3 = "cases_ecoliW3110_ecoliDH10B_ecoliO157I_shigella_salmonella/less/muscle/";
-		JPanel mp3 = getFilePanel(name3);
+//		JPanel mp3 = getFilePanel(name3);
+		JScrollPane mp3 = getFileScrollPane(name3);
 		this.add(mp3);
 		
 	}
@@ -57,11 +60,14 @@ public class startPanel extends JPanel{
 	}
 	
 	private JScrollPane getFileScrollPane(String dir){
-		JPanel p1= new JPanel();
-		p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
 		File f = new File(dir);
 		File[] ff = f.listFiles();
-		Arrays.sort(ff);
+		Arrays.sort(ff);		
+		
+		JPanel p1= new JPanel();
+		p1.setLayout(new GridLayout((int)(ff.length/5)+1, 5,5, 5));
+		p1.setAlignmentX(CENTER_ALIGNMENT);
+	
 		for (int i = 0; i < ff.length; i++) {
 			final JButton seeAln = new JButton(ff[i].getName());
 			seeAln.setName(ff[i].getAbsolutePath());
@@ -79,7 +85,8 @@ public class startPanel extends JPanel{
 			p1.add(seeAln);
 		}
 		JScrollPane p= new JScrollPane(p1);
-		p.setPreferredSize(new Dimension(300, 500));
+		p.setPreferredSize(new Dimension(1200, 800));
+		p.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);;
 		return p;
 	}
 	

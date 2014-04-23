@@ -41,7 +41,7 @@ public class tabs extends JTabbedPane{
 	}
 	
 	public void addAlnTab(Alignment a,String f){
-		alnPanel ap = new alnPanel(a,f);
+		alnPanel ap = new alnPanel(a,f,300);
 		String name = a.getName();
 		this.addTab(name,ap);
 		int i = indexOfComponent(ap);

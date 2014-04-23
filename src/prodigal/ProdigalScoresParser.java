@@ -19,12 +19,37 @@ public class ProdigalScoresParser {
 				st.nextToken();
 				int beg = Integer.parseInt(st.nextToken().trim());
 				int end = Integer.parseInt(st.nextToken().trim());
-				int strand = Integer.parseInt(st.nextToken().trim());
-			
+				int strand = Integer.parseInt(st.nextToken().trim());		
 				String codon_line = st.nextToken().split(";")[2];
 				String codon = codon_line.substring(codon_line.indexOf('=')+1);
 				pr = new ProdigalRecord(beg, end, strand, 0,codon);
 				break;
+			}
+			l=br.readLine();
+		}
+		br.close();
+		
+		return pr;
+	}
+	
+	public static ProdigalRecord lookForProdigalfromFasta(String f,int MOstrand,int MOstrat,int MOend) throws IOException{
+		ProdigalRecord pr=null;
+		
+		BufferedReader br = new BufferedReader(new FileReader(f));
+		String l = br.readLine();
+		while(l!=null){
+			if (l.startsWith(">")){
+				StringTokenizer st = new StringTokenizer(l,"#");
+				st.nextToken();
+				int beg = Integer.parseInt(st.nextToken().trim());
+				int end = Integer.parseInt(st.nextToken().trim());
+				int strand = Integer.parseInt(st.nextToken().trim());
+				if ((strand==1&&MOstrand==1&&end==MOend)||(strand==-1&&MOstrand==-1&&beg==MOstrat)){
+					String codon_line = st.nextToken().split(";")[2];
+					String codon = codon_line.substring(codon_line.indexOf('=')+1);
+					pr = new ProdigalRecord(beg, end, strand, 0,codon);
+					break;
+				}				
 			}
 			l=br.readLine();
 		}

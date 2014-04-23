@@ -1,5 +1,7 @@
 package thmm;
 
+import graph2.CasesPanel;
+
 import java.io.File;
 import java.util.Arrays;
 
@@ -10,14 +12,17 @@ public class CalcAllCases {
 	public static final String dir = "cases_ecoliW3110_ecoliDH10B_ecoliO157I_shigella_salmonella/less/muscle/"; 
 	
 	public static int[] doAll(double alpha,double lambda) throws Exception{
-		File f = new File(dir);
+		File f = new File(CasesPanel.MOG_alnDir);
 		File[] ff = f.listFiles();
 		Arrays.sort(ff);
 		int count = 0;
 		int countZeroCases = 0;
 //		System.out.println("number of cases:"+ff.length);
 		for (int i = 0; i < ff.length; i++) {
-			FBSolverLog res = Launch.thmm(ff[i].getAbsolutePath(), alpha, lambda);
+			String alnName = ff[i].getAbsolutePath();
+			final String treeFile =CasesPanel.MOG_treeDir+alnName.substring(alnName.lastIndexOf("/"))+".nwk";
+//			FBSolverLog res = Launch.thmm(ff[i].getAbsolutePath(), alpha, lambda);
+			FBSolverLog res = LaunchMO.thmm(ff[i].getAbsolutePath(), treeFile ,alpha, lambda);
 			int e = res.getEventsNumber();
 //			System.out.println(i+" "+ff[i]+" "+e);
 			count+=e;

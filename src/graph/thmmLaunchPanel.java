@@ -15,8 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
 import thmm.Launch;
+import thmm.LaunchMO;
 
 public class thmmLaunchPanel extends JPanel{
 	
@@ -54,10 +54,12 @@ public class thmmLaunchPanel extends JPanel{
 				}
 				catch(NumberFormatException ex1) {}
 				String res = Launch.thmmString(f,a,l);
+//				String res = LaunchMO.thmmString(f,a,l);
 				text.setText(res);
 			}
 			catch(Exception x){
-				JOptionPane.showMessageDialog(null, "Exception in thmm...");
+				x.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Exception in thmm..."+x.getMessage());
 			}				
 		}
 	});	
